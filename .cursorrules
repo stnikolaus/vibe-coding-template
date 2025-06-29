@@ -1,0 +1,134 @@
+# Cursor Rules for Vibe Coding Template
+
+## Tech Stack
+- **Framework**: Next.js 15 with App Router
+- **Language**: TypeScript
+- **Database**: PostgreSQL with Drizzle ORM
+- **Styling**: Tailwind CSS 4.1.7
+- **Authentication**: Custom JWT-based auth with jose
+- **Package Manager**: pnpm
+- **UI Components**: Radix UI + custom components
+
+## Project Structure
+- `/app` - Next.js App Router pages and layouts
+- `/components` - Reusable UI components
+- `/lib` - Utility functions, database, and auth logic
+- `/lib/db` - Database schema, migrations, and queries
+
+## Database Commands
+When working with the database, use these commands in order:
+
+1. **Generate migrations** (after schema changes):
+   ```bash
+   pnpm db:generate
+   ```
+
+2. **Apply migrations**:
+   ```bash
+   pnpm db:migrate
+   ```
+
+## Development Commands
+- `pnpm dev` - Start development server with Turbopack
+- `pnpm build` - Build for production
+
+## Coding Standards
+
+### TypeScript
+- Use strict TypeScript configuration
+- Prefer type inference when possible
+- Use Drizzle's inferred types: `typeof table.$inferSelect` and `typeof table.$inferInsert`
+- Always type function parameters and return values
+
+### Database
+- All database operations should use Drizzle ORM
+- Use the `db` instance from `/lib/db/drizzle.ts`
+- Follow the existing schema patterns in `/lib/db/schema.ts`
+- Use relations for complex queries
+- Always handle database errors gracefully
+
+### Components
+- Use Radix UI primitives as base components
+- Follow the component patterns in `/components/ui/`
+- Use `class-variance-authority` for component variants
+- Use `clsx` and `tailwind-merge` for conditional styling
+
+### Authentication
+- Use the auth utilities in `/lib/auth/`
+- Protect routes using the middleware in `/lib/auth/middleware.ts`
+- Use server-only functions for auth operations
+
+### File Naming
+- Use kebab-case for file names
+- Use PascalCase for component names
+- Use camelCase for functions and variables
+- Use UPPER_SNAKE_CASE for constants and enums
+
+### Imports
+- Use absolute imports with `@/` prefix
+- Group imports: external libraries, internal modules, relative imports
+- Use named imports for better tree-shaking
+
+## Common Patterns
+
+### Database Queries
+```typescript
+import { db } from '@/lib/db/drizzle';
+import { users } from '@/lib/db/schema';
+
+// Select with relations
+const userWithTeams = await db.query.users.findFirst({
+  with: {
+    teamMembers: {
+      with: {
+        team: true
+      }
+    }
+  }
+});
+```
+
+### API Routes
+```typescript
+import { NextRequest, NextResponse } from 'next/server';
+import { z } from 'zod';
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    // Validate with Zod
+    // Process with Drizzle
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: 'Internal error' }, { status: 500 });
+  }
+}
+```
+
+### Form Validation
+- Use Zod for schema validation
+- Validate on both client and server
+- Provide clear error messages
+
+## Environment Variables
+Required environment variables:
+- `POSTGRES_URL` - PostgreSQL connection string
+
+## Performance Considerations
+- Use Next.js Image component for images
+- Implement proper caching strategies
+- Use SWR for client-side data fetching
+- Optimize database queries with proper indexing
+
+## Security
+- Always validate user input with Zod
+- Use parameterized queries (Drizzle handles this)
+- Implement proper authentication checks
+- Sanitize user data before database operations
+- Use HTTPS in production
+
+## Testing
+- Write tests for critical business logic
+- Test database operations with proper setup/teardown
+- Mock external dependencies
+- Test both success and error scenarios 

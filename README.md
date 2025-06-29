@@ -1,119 +1,110 @@
-# Next.js SaaS Starter
+# Vibe Coding Template
 
-This is a starter template for building a SaaS application using **Next.js** with support for authentication, Stripe integration for payments, and a dashboard for logged-in users.
+A super simple starter pack for non-tech people to start vibe coding in just **5 minutes**. No complex setup, no overwhelming features - just the essentials to get you building and shipping quickly.
 
-**Demo: [https://next-saas-start.vercel.app/](https://next-saas-start.vercel.app/)**
+## 🚀 5-Minute Setup
 
-## Features
+1. **Clone & Install**
+   ```bash
+   git clone https://github.com/stnikolaus/vibe-coding-template
+   cd vibe-coding-template
+   pnpm install
+   ```
 
-- Marketing landing page (`/`) with animated Terminal element
-- Pricing page (`/pricing`) which connects to Stripe Checkout
-- Dashboard pages with CRUD operations on users/teams
-- Basic RBAC with Owner and Member roles
-- Subscription management with Stripe Customer Portal
-- Email/password authentication with JWTs stored to cookies
-- Global middleware to protect logged-in routes
-- Local middleware to protect Server Actions or validate Zod schemas
-- Activity logging system for any user events
+2. **Create Supabase Database**
+   
+   **Step 1**: Go to [supabase.com](https://supabase.com) and create a free account
+   
+   **Step 2**: Create a new project
+   - Click "New Project"
+   - Choose your organization
+   - Give your project a name (e.g., "my-vibe-app")
+   - Set a database password (**save this!**)
+   - Choose a region close to you
+   - Click "Create new project"
+   
+   **Step 3**: Get your database Postgre URL
+   - Open your project
+   - Click "Connect" in the top navigation panel
+   - Find "Transaction pooler" and copy it
+   - It looks like: `postgresql://postgres.xyz:[YOUR-PASSWORD]@aws-0-eu-north-1.pooler.supabase.com:6543/postgres`
+   - Update the URL with your password you saved earlier
 
-## Tech Stack
+3. **Setup Database**
+   ```bash
+   pnpm db:setup
+   ```
+   When prompted, paste your Supabase database URL.
 
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Database**: [Postgres](https://www.postgresql.org/)
-- **ORM**: [Drizzle](https://orm.drizzle.team/)
-- **Payments**: [Stripe](https://stripe.com/)
-- **UI Library**: [shadcn/ui](https://ui.shadcn.com/)
+   Then run:
+   ```bash
+   pnpm db:migrate
+   pnpm db:seed
+   ```
 
-## Getting Started
+4. **Start Coding**
+   ```bash
+   pnpm dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) and you're ready to vibe! 🎉
 
-```bash
-git clone https://github.com/nextjs/saas-starter
-cd saas-starter
-pnpm install
-```
+## What You Get
 
-## Running Locally
+- ✅ **Ready-to-use dashboard** with team management
+- ✅ **User authentication** (sign up, login, logout)
+- ✅ **Team collaboration** (invite members, manage roles)
+- ✅ **Activity tracking** (see what's happening)
+- ✅ **Clean, modern UI** that looks professional
+- ✅ **No payment complexity** - focus on building features
 
-[Install](https://docs.stripe.com/stripe-cli) and log in to your Stripe account:
+## Default Login
 
-```bash
-stripe login
-```
+After setup, you can log in with:
+- **Email**: `test@test.com`
+- **Password**: `admin123`
 
-Use the included setup script to create your `.env` file:
+## Dashboard Overview
 
-```bash
-pnpm db:setup
-```
+Your new app comes with a clean dashboard structure:
 
-Run the database migrations and seed the database with a default user and team:
+- **🏠 Home** - Your main dashboard
+- **👥 Team** - Manage team members and invitations
+- **⚙️ General** - Update your account info
+- **📊 Activity** - See what's been happening
+- **🔒 Security** - Change passwords and manage security
 
-```bash
-pnpm db:migrate
-pnpm db:seed
-```
+## Perfect For
 
-This will create the following user and team:
+- **Non-technical founders** who want to build something quickly
+- **Solo developers** who need a solid foundation
+- **Startups** that want to focus on features, not infrastructure
+- **Anyone** who wants to start coding without the overwhelm
 
-- User: `test@test.com`
-- Password: `admin123`
+## Tech Stack (Don't Worry About This)
 
-You can also create new users through the `/sign-up` route.
+- **Next.js** - Modern React framework
+- **Supabase** - Database and authentication (free tier available)
+- **Drizzle** - Simple database management
+- **shadcn/ui** - Beautiful, accessible components
 
-Finally, run the Next.js development server:
+## Next Steps
 
-```bash
-pnpm dev
-```
+1. **Customize the landing page** - Make it yours
+2. **Add your features** - Build what matters to your users
+3. **Deploy to Vercel** - One-click deployment
+4. **Add payments later** - When you're ready to monetize
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app in action.
+## Need Help?
 
-You can listen for Stripe webhooks locally through their CLI to handle subscription change events:
+- Check out the code comments - they explain everything
+- The structure is simple and easy to understand
+- Each file has a clear purpose
+- No complex abstractions or over-engineering
 
-```bash
-stripe listen --forward-to localhost:3000/api/stripe/webhook
-```
+## Why "Vibe Coding"?
 
-## Testing Payments
+Because coding should feel good, not overwhelming. This template removes the friction and lets you focus on building something awesome. No more getting stuck on setup - just pure creation vibes! ✨
 
-To test Stripe payments, use the following test card details:
+---
 
-- Card Number: `4242 4242 4242 4242`
-- Expiration: Any future date
-- CVC: Any 3-digit number
-
-## Going to Production
-
-When you're ready to deploy your SaaS application to production, follow these steps:
-
-### Set up a production Stripe webhook
-
-1. Go to the Stripe Dashboard and create a new webhook for your production environment.
-2. Set the endpoint URL to your production API route (e.g., `https://yourdomain.com/api/stripe/webhook`).
-3. Select the events you want to listen for (e.g., `checkout.session.completed`, `customer.subscription.updated`).
-
-### Deploy to Vercel
-
-1. Push your code to a GitHub repository.
-2. Connect your repository to [Vercel](https://vercel.com/) and deploy it.
-3. Follow the Vercel deployment process, which will guide you through setting up your project.
-
-### Add environment variables
-
-In your Vercel project settings (or during deployment), add all the necessary environment variables. Make sure to update the values for the production environment, including:
-
-1. `BASE_URL`: Set this to your production domain.
-2. `STRIPE_SECRET_KEY`: Use your Stripe secret key for the production environment.
-3. `STRIPE_WEBHOOK_SECRET`: Use the webhook secret from the production webhook you created in step 1.
-4. `POSTGRES_URL`: Set this to your production database URL.
-5. `AUTH_SECRET`: Set this to a random string. `openssl rand -base64 32` will generate one.
-
-## Other Templates
-
-While this template is intentionally minimal and to be used as a learning resource, there are other paid versions in the community which are more full-featured:
-
-- https://achromatic.dev
-- https://shipfa.st
-- https://makerkit.dev
-- https://zerotoshipped.com
-- https://turbostarter.dev
+**Ready to start vibe coding?** Clone this repo and you'll be building in 5 minutes! 🚀
