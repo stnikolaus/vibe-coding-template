@@ -4,9 +4,18 @@ A super simple starter pack for non-tech people to start vibe coding in just **5
 
 ## 🚀 5-Minute Setup
 
-1. **Clone & Download template**
+1. **Clone & Download this template**
 
-   Open `Terminal` app on your computure in the folder where you want to install the project.
+   Open `Terminal` app on your computer in the folder where you want to install the project.
+   
+   **On Windows**: Right-click on the folder then choose "Open in Terminal"
+   
+   **On Mac**: 
+   - Right-click on the folder in Finder
+   - Hold the Option (⌥) key
+   - Click "Open in Terminal" (this option appears when holding Option)
+   
+   *Alternative for Mac*: Open Terminal app, then drag and drop the folder from Finder into the Terminal window
 
    Type in the following command and press enter:
 
@@ -16,11 +25,11 @@ A super simple starter pack for non-tech people to start vibe coding in just **5
 
 2. **Open project in Cursor**
 
-   1. Open Cursor
-   2. Click "File" > "Open Folder..."
-   3. Select the folder with your project
-   4. Open Terminal in Cursor by pressing Cmd/Ctrl + J
-   5. Run the command:
+   - Open Cursor
+   - Click "File" > "Open Folder..."
+   - Select the folder with your project template you just downloaded
+   - Open Terminal in Cursor by pressing Cmd/Ctrl + J
+   - Run the command:
    ```bash
    pnpm install
    ```
@@ -145,4 +154,4 @@ Note that this template:
 - Needs a Stripe account
 - Has additional complexity
 
-We recommend starting with this simpler template first, then migrating to the SaaS starter when you're ready to handle payments. This lets you focus on building and validating your core features before dealing with payment infrastructure.
+I recommend starting with this simpler template first, then migrating to the SaaS starter when you're ready to handle payments. This lets you focus on building and validating your core features before dealing with payment infrastructure.
