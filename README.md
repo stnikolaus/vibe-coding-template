@@ -4,14 +4,28 @@ A super simple starter pack for non-tech people to start vibe coding in just **5
 
 ## 🚀 5-Minute Setup
 
-1. **Clone & Install**
+1. **Clone & Download template**
+
+   Open `Terminal` app on your computure in the folder where you want to install the project.
+
+   Type in the following command and press enter:
+
    ```bash
    git clone https://github.com/stnikolaus/vibe-coding-template
-   cd vibe-coding-template
+   ```
+
+2. **Open project in Cursor**
+
+   1. Open Cursor
+   2. Click "File" > "Open Folder..."
+   3. Select the folder with your project
+   4. Open Terminal in Cursor by pressing Cmd/Ctrl + J
+   5. Run the command:
+   ```bash
    pnpm install
    ```
 
-2. **Create Supabase Database**
+3. **Create Supabase Database**
    
    **Step 1**: Go to [supabase.com](https://supabase.com) and create a free account
    
@@ -19,7 +33,7 @@ A super simple starter pack for non-tech people to start vibe coding in just **5
    - Click "New Project"
    - Choose your organization
    - Give your project a name (e.g., "my-vibe-app")
-   - Set a database password (**save this!**)
+   - Set (or generate) a database password (**save this!**)
    - Choose a region close to you
    - Click "Create new project"
    
@@ -30,23 +44,40 @@ A super simple starter pack for non-tech people to start vibe coding in just **5
    - It looks like: `postgresql://postgres.xyz:[YOUR-PASSWORD]@aws-0-eu-north-1.pooler.supabase.com:6543/postgres`
    - Update the URL with your password you saved earlier
 
-3. **Setup Database**
+4. **Setup Database**
+   
+   Run this command in Cursor Terminal:
    ```bash
    pnpm db:setup
    ```
-   When prompted, paste your Supabase database URL.
+   Choose "remote Postgres instance" option - click "R" and enter.
+   
+   When prompted, paste your Supabase Postgre database URL. And click enter.
 
    Then run:
    ```bash
    pnpm db:migrate
    pnpm db:seed
    ```
+   
+   This should install your database tables and create the first admin user.
 
-4. **Start Coding**
+5. **Start Coding**
+
+   Now, you are ready to go!
+   
+   Run this command in Cursor Terminal to start the app on your computer:
    ```bash
    pnpm dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) and you're ready to vibe! 🎉
+   Open [http://localhost:3000](http://localhost:3000) and you're ready to vibe code! 🎉
+
+## Default Login
+
+After setup, you can log in with:
+- **Email**: `test@test.com`
+- **Password**: `admin123`
+
 
 ## What You Get
 
@@ -56,12 +87,6 @@ A super simple starter pack for non-tech people to start vibe coding in just **5
 - ✅ **Activity tracking** (see what's happening)
 - ✅ **Clean, modern UI** that looks professional
 - ✅ **No payment complexity** - focus on building features
-
-## Default Login
-
-After setup, you can log in with:
-- **Email**: `test@test.com`
-- **Password**: `admin123`
 
 ## Dashboard Overview
 
@@ -108,3 +133,16 @@ Because coding should feel good, not overwhelming. This template removes the fri
 ---
 
 **Ready to start vibe coding?** Clone this repo and you'll be building in 5 minutes! 🚀
+
+
+## Want to Collect Payments?
+
+If you're ready to monetize your project and need Stripe integration, check out the [Next.js SaaS Starter](https://github.com/nextjs/saas-starter).
+
+Note that this template:
+
+- Requires more technical setup
+- Needs a Stripe account
+- Has additional complexity
+
+We recommend starting with this simpler template first, then migrating to the SaaS starter when you're ready to handle payments. This lets you focus on building and validating your core features before dealing with payment infrastructure.
